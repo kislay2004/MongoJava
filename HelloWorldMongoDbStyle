@@ -1,0 +1,36 @@
+package com.mongojava.M101J;
+
+import com.mongodb.*;
+
+import java.net.UnknownHostException;
+import java.util.Set;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: kikishor
+ * Date: 3/24/14
+ * Time: 11:03 PM
+ * To change this template use File | Settings | File Templates.
+ */
+public class HelloWorldMongoDbStyle {
+
+    public static void main(String arg[]) throws UnknownHostException {
+
+        MongoClient client = new MongoClient(new ServerAddress("localhost", 27017));
+        DB database = client.getDB("test");
+
+        //1. Printing list of collections from a database
+        Set<String> colls = database.getCollectionNames();
+
+        for (String s : colls) {
+            System.out.println(s);
+        }
+        //2. Printing a document form a from a collection
+        DBCollection collection = database.getCollection("mycollection");
+        DBObject document = collection.findOne();
+
+        System.out.println(document);
+    }
+
+
+}
